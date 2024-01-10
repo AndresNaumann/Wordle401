@@ -25,20 +25,21 @@ def wordle():
             letter = gw.get_square_letter(rowInit, col)
             finalWord += letter
 
+        #check in terminal to make sure it's concatenating correctly
         print(finalWord)
 
+        # dictionary is in lowercase so you have to change back to lowercase before checking
         finalWord = finalWord.lower()
 
+        # Check if the word is in the dictionary
         if finalWord in FIVE_LETTER_WORDS:
             gw.show_message("Word found")
             
-        # Add any additional actions for a valid word
+
+        # Add any additional actions for an invalid word
         else:
             gw.show_message("Not in word list")
-        # Add any additional actions for an invalid word
-
-        
-        
+       
 
     # Add the enter listener to the window
     gw.add_enter_listener(enter_action)
