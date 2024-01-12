@@ -8,7 +8,6 @@ def wordle():
 
     #initialize variables, the secret word, and the guess word
     secretDict = {}
-    guessDict = {}
     iCount = 0
 
     #selecting a secret word from five letter words and converting to uppercase
@@ -27,7 +26,7 @@ def wordle():
 
     #creating actions to be performed when the enter key is pressed
     def enter_action(s):
-
+        iCount = 0
         guessDict = {}
         incrament = 0
         #concatenating the letters in the row
@@ -42,17 +41,21 @@ def wordle():
         #checking if the guess word is in the dictionary
         if finalWord in FIVE_LETTER_WORDS:
             gw.show_message("Word found")
+
             for i in finalWord:
+                i = i.upper()
                 guessDict.update({iCount : i})
                 iCount += 1
+            print(guessDict)
+
             
             for i in secretDict:
                 if secretDict[i] == guessDict[i]:
-                    print(f'{i} , {incrament}')
+                    gw.set_square_color(incrament, i, CORRECT_COLOR)
                 elif secretDict[i] in guessDict.values():
-                    print("in word")
+                    gw.set_square_color(incrament, i, PRESENT_COLOR)
                 else:
-                    print("not in word")
+                    gw.set_square_color(incrament, i, MISSING_COLOR)
                 
         else:
             gw.show_message("Not in word list")
