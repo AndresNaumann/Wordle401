@@ -65,7 +65,8 @@ def wordle():
                 gw.exit_on_click()
             else:
                 gw.set_current_row(gw.get_current_row() + 1)
-                numberOfGuesses -= 1
+                numberOfGuesses = numberOfGuesses - 1
+                print(numberOfGuesses)
 
 
 
