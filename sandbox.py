@@ -8,10 +8,10 @@ def wordle():
     gw = WordleGWindow()
 
     # selecting a secret word from five letter words and converting to uppercase
-    # secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+    secretWord = random.choice(FIVE_LETTER_WORDS).upper()
 
     # # testing double letter guess DOORS
-    secretWord = "STEAL"
+    # secretWord = "STEAL"
 
     #function to create a list of individual letter in a word
     def makeWordList(word):
@@ -117,6 +117,6 @@ wordle()
 
 # to-do-list:
 # stop game after win or loss
-# only certian number of plays 
+# only certian number of plays
 # clear row on no word found
 
