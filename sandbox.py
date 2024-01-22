@@ -25,9 +25,10 @@ def wordle():
     print(testingList)
     
 
-
     # creating actions to be performed when the enter key is pressed
     def enter_action(s):
+
+       
 
         
         #function to create a list of individual letter in a word
@@ -63,6 +64,7 @@ def wordle():
             for i in range(len(guessList)):
                 if guessList[i] == testingList[i]:
                     gw.set_square_color(gw.get_current_row(), i, CORRECT_COLOR)
+                    gw.set_key_color(guessList[i], CORRECT_COLOR)
                     changingList[i] = fillerVar
                     # print("correct")
                 elif guessList[i] in changingList:
