@@ -77,7 +77,7 @@ def wordle():
                     
                 else:
                     gw.set_square_color(gw.get_current_row(), i, MISSING_COLOR)
-                    print("missing")
+                    # print("missing")
             # print(changingList)
             # print(guessList)
             # print(testingList)
