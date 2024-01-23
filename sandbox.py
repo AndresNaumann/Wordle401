@@ -89,11 +89,6 @@ def wordle():
                     gw.set_square_color(gw.get_current_row(), i, MISSING_COLOR)
                     gw.set_key_color(guessList[i], MISSING_COLOR)
 
-
-                    # print("missing")
-            # print(changingList)
-            # print(guessList)
-            # print(testingList)
         
             # check if the player has won or lost
             # might have to swith the order of the if statements
