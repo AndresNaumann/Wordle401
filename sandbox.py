@@ -10,7 +10,8 @@ def wordle():
     gw = WordleGWindow()
 
     # selecting a secret word from five letter words and converting to uppercase
-    secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+    # secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+    secretWord = "FALLS"
 
     # # testing double letter guess DOORS
     # secretWord = "STEAL"
