@@ -65,18 +65,31 @@ def wordle():
                 if guessList[i] == testingList[i]:
                     gw.set_square_color(gw.get_current_row(), i, CORRECT_COLOR)
                     gw.set_key_color(guessList[i], CORRECT_COLOR)
+                    
                     changingList[i] = fillerVar
                     # print("correct")
+
+
                 elif guessList[i] in changingList:
                     gw.set_square_color(gw.get_current_row(), i, PRESENT_COLOR)
+                    curColor = gw.get_key_color(guessList[i])
+                    if curColor == CORRECT_COLOR:
+                        print("already correct")
+                    else:
+                        gw.set_key_color(guessList[i], PRESENT_COLOR)
+
                     for e in range(len(testingList)):
                         if guessList[i] == changingList[e]:
                             changingList[e] = fillerVar
                             break
                     guessList[i] = fillerVar
                     
+
                 else:
                     gw.set_square_color(gw.get_current_row(), i, MISSING_COLOR)
+                    gw.set_key_color(guessList[i], MISSING_COLOR)
+
+
                     # print("missing")
             # print(changingList)
             # print(guessList)
