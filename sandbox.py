@@ -133,8 +133,4 @@ def clear_current_row(gw):
 
 wordle()
 
-# to-do-list:
-# stop game after win or loss
-# only certian number of plays
-# clear row on no word found
 
