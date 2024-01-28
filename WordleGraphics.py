@@ -113,6 +113,7 @@ class WordleGWindow:
                     s += self._grid[self._row][col].get_letter();
                 for fn in self._enter_listeners:
                     fn(s)
+                self.set_current_row(self._row + 1)
             elif ch.isalpha():
                 self.show_message("")
                 if self._row < N_ROWS and self._col < N_COLS:
@@ -171,6 +172,9 @@ class WordleGWindow:
         self._col = 0
         atexit.register(start_event_loop)
 
+        root.bind("<Delete>", lambda event: self.delete_last_letter())
+
+
     def get_square_letter(self, row, col):
         return self._grid[row][col].get_letter()
 
@@ -204,6 +208,13 @@ class WordleGWindow:
 
     def show_message(self, msg, color="Black"):
         self._message.set_text(msg, color)
+    
+    def delete_last_letter(self):
+        if self._col > 0:
+            self._col -= 1
+            sq = self._grid[self._row][self._col]
+            sq.set_letter(" ")
+
 
 
 class WordleSquare:
