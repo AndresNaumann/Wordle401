@@ -62,6 +62,7 @@ class WordleGWindow:
     """This class creates the Wordle window."""
 
     def __init__(self):
+        
 
         """Creates the Wordle window."""
         
@@ -72,6 +73,8 @@ class WordleGWindow:
                     WordleSquare(canvas, i, j) for j in range(N_COLS)
                 ] for i in range(N_ROWS)
             ]
+
+
 
         def create_keyboard():
             keys = { }
