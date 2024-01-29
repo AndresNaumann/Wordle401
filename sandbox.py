@@ -65,6 +65,10 @@ def wordle():
                     changingGuessList[i] = fillerVar2
                     gw.set_square_color(gw.get_current_row(), i, CORRECT_COLOR)
                     gw.set_key_color(testingGuessList[i], CORRECT_COLOR)
+                print("green")
+                print(changingList)
+                print(changingGuessList)
+                print(" ")
             
             # print(changingList)
             # print(changingGuessList)
@@ -74,9 +78,14 @@ def wordle():
             for i in range(len(testingGuessList)):
                 if changingGuessList[i] in changingList:
                     changingList[i] = fillerVar2
+                    changingGuessList[i] = fillerVar
                     gw.set_square_color(gw.get_current_row(), i, PRESENT_COLOR)
                     if gw.get_key_color(testingGuessList[i]) != CORRECT_COLOR:
                         gw.set_key_color(testingGuessList[i], PRESENT_COLOR)
+                print("yellow")
+                print(changingList)
+                print(changingGuessList)
+                print(" ")
 
             # print(changingList)
             # print(changingGuessList)
@@ -88,6 +97,10 @@ def wordle():
                     gw.set_square_color(gw.get_current_row(), i, MISSING_COLOR)
                     if gw.get_key_color(testingGuessList[i]) != CORRECT_COLOR and gw.get_key_color(testingGuessList[i]) != PRESENT_COLOR:
                         gw.set_key_color(testingGuessList[i], MISSING_COLOR)
+                print("grey")
+                print(changingList)
+                print(changingGuessList)
+                print(" ")
 
             # print(changingList)
             # print(changingGuessList)
@@ -126,7 +139,7 @@ def wordle():
         else:
             gw.show_message("Not in word list")
             clear_current_row(gw)
-            gw.set_current_row(gw.get_current_row())
+            gw.set_current_row(gw.get_current_row()-1)
 
        #reset the changing list between submissions
         changingList = makeWordList(secretWord)
