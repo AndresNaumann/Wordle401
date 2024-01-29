@@ -242,6 +242,14 @@ class WordleGWindow:
             sq = self._grid[self._row][self._col]
             sq.set_letter(" ")
 
+    def handle_enter_key(self):
+        self.show_message("")
+        s = ""
+        for col in range(N_COLS):
+            s += self._grid[self._row][col].get_letter()
+        for fn in self._enter_listeners:
+            fn(s)
+
     def create_colorblind_toggle(self):
         # Position and create the toggle button
             self.toggle_button = tkinter.Button(self._root, text="Colorblind Mode", command=self.toggle_colorblind_mode)
