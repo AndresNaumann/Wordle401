@@ -111,7 +111,7 @@ class WordleGWindow:
 
 
         def key_action(tke):
-            print(tke)
+            # print(tke)
             if isinstance(tke, str):
                 ch = tke.upper()
             else:
@@ -122,7 +122,7 @@ class WordleGWindow:
                     self._col -= 1
                     sq = self._grid[self._row][self._col]
                     sq.set_letter(" ")
-            elif ch == "\r" or ch == "\n" or ch == "ENTER" or tke.keycode == 36:
+            elif ch == "\r" or ch == "\n" or ch == "ENTER":
                 self.show_message("")
                 s = ""
                 for col in range(N_COLS):
@@ -188,12 +188,15 @@ class WordleGWindow:
         self._col = 0
         atexit.register(start_event_loop)
         self.colorblind_mode = False
+        self.create_colorblind_toggle()
 
 
         root.bind("<Delete>", lambda event: self.delete_last_letter())
         #make delete button work on mac
         root.bind("<BackSpace>", lambda event: self.delete_last_letter())
-       
+       #make enter key work on mac 
+        root.bind("<Return>", lambda event: self.handle_enter_key())
+        root.bind("<KP_Enter>", lambda event: self.handle_enter_key())
 
 
 

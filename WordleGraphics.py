@@ -21,6 +21,11 @@ MISSING_COLOR = "#999999"       # Gray for letters that don't appear
 UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
 
+# Additional color constants for colorblind mode
+CB_CORRECT_COLOR = "#ffc107"  # Define a suitable color
+CB_PRESENT_COLOR = "#449AE4"
+CB_MISSING_COLOR = "#999999"
+
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)
 
@@ -57,6 +62,8 @@ BOARD_WIDTH = N_COLS * SQUARE_SIZE + (N_COLS - 1) * SQUARE_SEP
 BOARD_HEIGHT = N_ROWS * SQUARE_SIZE + (N_ROWS - 1) * SQUARE_SEP
 MESSAGE_X = CANVAS_WIDTH / 2
 MESSAGE_Y = TOP_MARGIN + BOARD_HEIGHT + MESSAGE_SEP
+
+
 
 class WordleGWindow:
     """This class creates the Wordle window."""
@@ -104,6 +111,7 @@ class WordleGWindow:
 
 
         def key_action(tke):
+            # print(tke)
             if isinstance(tke, str):
                 ch = tke.upper()
             else:
@@ -157,6 +165,8 @@ class WordleGWindow:
         def start_event_loop():
             """Starts the tkinter event loop when the program exits."""
             root.mainloop()
+        
+       
 
         root = tkinter.Tk()
         root.title("Wordle")
@@ -179,12 +189,16 @@ class WordleGWindow:
         self._row = 0
         self._col = 0
         atexit.register(start_event_loop)
+        self.colorblind_mode = False
+        self.create_colorblind_toggle()
+
 
         root.bind("<Delete>", lambda event: self.delete_last_letter())
-
         #make delete button work on mac
         root.bind("<BackSpace>", lambda event: self.delete_last_letter())
-    
+       #make enter key work on mac 
+        root.bind("<Return>", lambda event: self.handle_enter_key())
+        root.bind("<KP_Enter>", lambda event: self.handle_enter_key())
 
 
 
@@ -227,6 +241,39 @@ class WordleGWindow:
             self._col -= 1
             sq = self._grid[self._row][self._col]
             sq.set_letter(" ")
+
+    def create_colorblind_toggle(self):
+        # Position and create the toggle button
+            self.toggle_button = tkinter.Button(self._root, text="Colorblind Mode", command=self.toggle_colorblind_mode)
+            self.toggle_button.pack()  # Adjust position and style as needed
+
+    def toggle_colorblind_mode(self):
+        # Switch the colorblind mode
+            self.colorblind_mode = not self.colorblind_mode
+            self.update_colors()
+
+    def update_colors(self):
+        # Update all squares and keys to the new color scheme
+            for row in self._grid:
+                for square in row:
+                    if square.get_color() in [CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR]:
+                        square.set_color(self.get_colorblind_color(square.get_color()))
+
+            for key in self._keys.values():
+                if key.get_color() in [CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR]:
+                    key.set_color(self.get_colorblind_color(key.get_color()))
+
+    def get_colorblind_color(self, normal_color):
+        # Return the colorblind-friendly equivalent of the normal color
+            if not self.colorblind_mode:
+                return normal_color
+            if normal_color == CORRECT_COLOR:
+                return CB_CORRECT_COLOR
+            elif normal_color == PRESENT_COLOR:
+                return CB_PRESENT_COLOR
+            elif normal_color == MISSING_COLOR:
+                return CB_MISSING_COLOR
+            return normal_color
 
 
 
@@ -335,5 +382,3 @@ class WordleMessage:
     def set_text(self, text, color="Black"):
         self._text = text
         self._canvas.itemconfigure(self._msg, text=text, fill=color)
-
-
