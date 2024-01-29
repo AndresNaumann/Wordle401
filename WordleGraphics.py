@@ -181,6 +181,8 @@ class WordleGWindow:
         atexit.register(start_event_loop)
 
         root.bind("<Delete>", lambda event: self.delete_last_letter())
+
+        #make delete button work on mac
         root.bind("<BackSpace>", lambda event: self.delete_last_letter())
     
 
@@ -333,3 +335,5 @@ class WordleMessage:
     def set_text(self, text, color="Black"):
         self._text = text
         self._canvas.itemconfigure(self._msg, text=text, fill=color)
+
+

@@ -21,6 +21,11 @@ MISSING_COLOR = "#999999"       # Gray for letters that don't appear
 UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
 
+# Additional color constants for colorblind mode
+CB_CORRECT_COLOR = "#ffc107"  # Define a suitable color
+CB_PRESENT_COLOR = "#449AE4"
+CB_MISSING_COLOR = "#999999"
+
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)
 
@@ -57,6 +62,8 @@ BOARD_WIDTH = N_COLS * SQUARE_SIZE + (N_COLS - 1) * SQUARE_SEP
 BOARD_HEIGHT = N_ROWS * SQUARE_SIZE + (N_ROWS - 1) * SQUARE_SEP
 MESSAGE_X = CANVAS_WIDTH / 2
 MESSAGE_Y = TOP_MARGIN + BOARD_HEIGHT + MESSAGE_SEP
+
+
 
 class WordleGWindow:
     """This class creates the Wordle window."""
@@ -104,6 +111,7 @@ class WordleGWindow:
 
 
         def key_action(tke):
+            print(tke)
             if isinstance(tke, str):
                 ch = tke.upper()
             else:
@@ -114,7 +122,7 @@ class WordleGWindow:
                     self._col -= 1
                     sq = self._grid[self._row][self._col]
                     sq.set_letter(" ")
-            elif ch == "\r" or ch == "\n" or ch == "ENTER":
+            elif ch == "\r" or ch == "\n" or ch == "ENTER" or tke.keycode == 36:
                 self.show_message("")
                 s = ""
                 for col in range(N_COLS):
@@ -179,8 +187,11 @@ class WordleGWindow:
         self._row = 0
         self._col = 0
         atexit.register(start_event_loop)
+        self.colorblind_mode = False
+
 
         root.bind("<Delete>", lambda event: self.delete_last_letter())
+        #make delete button work on mac
         root.bind("<BackSpace>", lambda event: self.delete_last_letter())
        
 
