@@ -181,6 +181,7 @@ class WordleGWindow:
         atexit.register(start_event_loop)
 
         root.bind("<Delete>", lambda event: self.delete_last_letter())
+        root.bind("<BackSpace>", lambda event: self.delete_last_letter())
 
 
     def get_square_letter(self, row, col):
