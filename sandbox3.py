@@ -48,6 +48,7 @@ def wordle():
             # checking if the guess word is in the dictionary
         if guessWord in FIVE_LETTER_WORDS:
             gw.show_message("Word found")
+            print(gw.get_current_row())
 
             # makes a list of letters in the guessed word
 
@@ -90,6 +91,11 @@ def wordle():
             # print(changingGuessList)
             # print(" ")
                     
+            if testingList == testingGuessList:
+                gw.show_message("You win!")
+                return
+                    
+            #problems with keys changing color
 
                 
 
@@ -106,9 +112,12 @@ def wordle():
             elif turnsleft == 0:
                 gw.show_message("You lose!")
                 
-        
-            else:
-                gw.set_current_row(gw.get_current_row() + 1)
+            
+            #this is the problem with the skipping rows 
+            # else:
+            #     gw.set_current_row(gw.get_current_row() + 1)
+
+            
                 
 
         # if the input word is in the word list:
