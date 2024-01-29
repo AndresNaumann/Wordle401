@@ -3,7 +3,7 @@ from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, N_ROWS
 
 CORRECT_COLOR = "blue"
-PRESENT_COLOR = "purple"
+PRESENT_COLOR = "orange"
 MISSING_COLOR = "grey"
 
 def wordle():
