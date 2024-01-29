@@ -62,7 +62,9 @@ class WordleGWindow:
     """This class creates the Wordle window."""
 
     def __init__(self):
+
         """Creates the Wordle window."""
+        
 
         def create_grid():
             return [
@@ -89,11 +91,13 @@ class WordleGWindow:
                     keys[label] = WordleKey(self._canvas, x, y, w, h, label)
                     x += w + KEY_XSEP
             return keys
+           
 
         def create_message():
             return WordleMessage(self._canvas,
                                  CANVAS_WIDTH / 2,
                                  MESSAGE_Y)
+
 
         def key_action(tke):
             if isinstance(tke, str):
