@@ -4,49 +4,39 @@ from WordleGraphics import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, 
 
 
 def wordle():
+
+    # generates the number of turns based on the number of rows
     gameLength = N_ROWS
     print(gameLength)
+
     # load graphical interface
     gw = WordleGWindow()
 
     # selecting a secret word from five letter words and converting to uppercase
     # secretWord = random.choice(FIVE_LETTER_WORDS).upper()clecle
     secretWord = "FALLS"
-
-    # # testing double letter guess DOORS
-    # secretWord = "STEAL"
-
-    #function to create a list of individual letter in a word
-    def makeWordList(word):
-        wordList = []
-        wordList = list(word)
-        return wordList
-
-    testingList = makeWordList(secretWord)
-    print(testingList)
-    
+    print(secretWord)
 
     # creating actions to be performed when the enter key is pressed
     def enter_action(s):
 
-       
+        #initialize variables
+        fillerVar = '*'
+        fillerVar2 = '#'
 
-        
-        #function to create a list of individual letter in a word
+        # function to create a list of individual letter in a word
         def makeWordList(word):
             word = word.upper()
             wordList = []
             wordList = list(word)
             return wordList
 
+        # unchanging secret word
+        testingList = makeWordList(secretWord)
+        # changing secret word
         changingList = makeWordList(secretWord)
-        print(changingList)
 
-            # initializing variables
-          
-        fillerVar = '*'
-
-            # concatenating the letters in the row into the guessed word
+        # concatenating the letters in the row into the guessed word
         guessWord = ""
         for col in range(N_COLS):
             letter = gw.get_square_letter(gw.get_current_row(), col)
@@ -58,37 +48,56 @@ def wordle():
             # checking if the guess word is in the dictionary
         if guessWord in FIVE_LETTER_WORDS:
             gw.show_message("Word found")
-            #makes a list of letters in the guessed word
-            guessList = makeWordList(guessWord)
-            # print(guessList)
+            print(gw.get_current_row())
+
+            # makes a list of letters in the guessed word
+
+            # unchanging guess word
+            testingGuessList = makeWordList(guessWord)
+            # changing guess list
+            changingGuessList = makeWordList(guessWord)
+
+            # first pass GREEN
             # color the letters based on if they're in the secret word or not
-            for i in range(len(guessList)):
-                if guessList[i] == testingList[i]:
-                    gw.set_square_color(gw.get_current_row(), i, CORRECT_COLOR)
-                    gw.set_key_color(guessList[i], CORRECT_COLOR)
-                    
+            for i in range(len(testingGuessList)):
+                if changingGuessList[i] == testingList[i]:
                     changingList[i] = fillerVar
-                    # print("correct")
+                    changingGuessList[i] = fillerVar2
+                    gw.set_square_color(gw.get_current_row(), i, CORRECT_COLOR)
+                    gw.set_key_color(testingGuessList[i], CORRECT_COLOR)
+            
+            # print(changingList)
+            # print(changingGuessList)
+            # print(" ")
 
-
-                elif guessList[i] in changingList:
+            # second pass YELLOW
+            for i in range(len(testingGuessList)):
+                if changingGuessList[i] in changingList:
+                    changingList[i] = fillerVar2
                     gw.set_square_color(gw.get_current_row(), i, PRESENT_COLOR)
-                    curColor = gw.get_key_color(guessList[i])
-                    if curColor == CORRECT_COLOR:
-                        print("already correct")
-                    else:
-                        gw.set_key_color(guessList[i], PRESENT_COLOR)
+                    gw.set_key_color(testingGuessList[i], PRESENT_COLOR)
 
-                    for e in range(len(testingList)):
-                        if guessList[i] == changingList[e]:
-                            changingList[e] = fillerVar
-                            break
-                    guessList[i] = fillerVar
-                    
-
-                else:
+            # print(changingList)
+            # print(changingGuessList)
+            # print(" ")
+            
+            # third pass GREY
+            for i in range(len(testingGuessList)):
+                if changingList[i] != fillerVar2 and changingList[i] != fillerVar:
                     gw.set_square_color(gw.get_current_row(), i, MISSING_COLOR)
-                    gw.set_key_color(guessList[i], MISSING_COLOR)
+                    gw.set_key_color(testingGuessList[i], MISSING_COLOR)
+
+            # print(changingList)
+            # print(changingGuessList)
+            # print(" ")
+                    
+            if testingList == testingGuessList:
+                gw.show_message("You win!")
+                return
+                    
+            #problems with keys changing color
+
+                
 
         
             # check if the player has won or lost
@@ -96,16 +105,19 @@ def wordle():
             turnsleft = (N_ROWS - gw.get_current_row()) - 1
             print(turnsleft)
 
-            if testingList == guessList:
+            if testingList == testingGuessList:
                 gw.show_message("You win!")
                 
             
             elif turnsleft == 0:
                 gw.show_message("You lose!")
                 
-        
-            else:
-                gw.set_current_row(gw.get_current_row() + 1)
+            
+            #this is the problem with the skipping rows 
+            # else:
+            #     gw.set_current_row(gw.get_current_row() + 1)
+
+            
                 
 
         # if the input word is in the word list:
