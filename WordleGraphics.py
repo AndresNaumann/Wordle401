@@ -22,8 +22,8 @@ UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
 
 # Additional color constants for colorblind mode
-CB_CORRECT_COLOR = "#ffc107"  # Define a suitable color
-CB_PRESENT_COLOR = "#449AE4"
+CB_CORRECT_COLOR = "#449AE4"  # Define a suitable color
+CB_PRESENT_COLOR = "#ffc107"
 CB_MISSING_COLOR = "#999999"
 
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
@@ -116,12 +116,14 @@ class WordleGWindow:
                 ch = tke.upper()
             else:
                 ch = tke.char.upper()
+                
             if ch == "\007" or ch == "\177" or ch == "DELETE":
                 self.show_message("")
                 if self._row < N_ROWS and self._col > 0:
                     self._col -= 1
                     sq = self._grid[self._row][self._col]
                     sq.set_letter(" ")
+                    
             elif ch == "\r" or ch == "\n" or ch == "ENTER":
                 self.show_message("")
                 s = ""
@@ -243,14 +245,19 @@ class WordleGWindow:
             sq.set_letter(" ")
 
     def create_colorblind_toggle(self):
-        # Position and create the toggle button
-            self.toggle_button = tkinter.Button(self._root, text="Colorblind Mode", command=self.toggle_colorblind_mode)
-            self.toggle_button.pack()  # Adjust position and style as needed
+        self.toggle_button = tkinter.Button(
+            self._root, 
+            text="Colorblind Mode: Off",  # Initial text
+            command=self.toggle_colorblind_mode
+        )
+        self.toggle_button.pack()  # Adjust position and style as needed
 
     def toggle_colorblind_mode(self):
         # Switch the colorblind mode
-            self.colorblind_mode = not self.colorblind_mode
-            self.update_colors()
+        self.colorblind_mode = not self.colorblind_mode
+        self.update_colors()
+        # Update the button text based on the mode
+        self.toggle_button.config(text=f"Colorblind Mode: {'On' if self.colorblind_mode else 'Off'}")
 
     def update_colors(self):
         # Update all squares and keys to the new color scheme
