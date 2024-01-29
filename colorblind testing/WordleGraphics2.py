@@ -165,6 +165,8 @@ class WordleGWindow:
         def start_event_loop():
             """Starts the tkinter event loop when the program exits."""
             root.mainloop()
+        
+       
 
         root = tkinter.Tk()
         root.title("Wordle")
@@ -239,6 +241,39 @@ class WordleGWindow:
             self._col -= 1
             sq = self._grid[self._row][self._col]
             sq.set_letter(" ")
+
+    def create_colorblind_toggle(self):
+        # Position and create the toggle button
+            self.toggle_button = tkinter.Button(self._root, text="Colorblind Mode", command=self.toggle_colorblind_mode)
+            self.toggle_button.pack()  # Adjust position and style as needed
+
+    def toggle_colorblind_mode(self):
+        # Switch the colorblind mode
+            self.colorblind_mode = not self.colorblind_mode
+            self.update_colors()
+
+    def update_colors(self):
+        # Update all squares and keys to the new color scheme
+            for row in self._grid:
+                for square in row:
+                    if square.get_color() in [CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR]:
+                        square.set_color(self.get_colorblind_color(square.get_color()))
+
+            for key in self._keys.values():
+                if key.get_color() in [CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR]:
+                    key.set_color(self.get_colorblind_color(key.get_color()))
+
+    def get_colorblind_color(self, normal_color):
+        # Return the colorblind-friendly equivalent of the normal color
+            if not self.colorblind_mode:
+                return normal_color
+            if normal_color == CORRECT_COLOR:
+                return CB_CORRECT_COLOR
+            elif normal_color == PRESENT_COLOR:
+                return CB_PRESENT_COLOR
+            elif normal_color == MISSING_COLOR:
+                return CB_MISSING_COLOR
+            return normal_color
 
 
 
