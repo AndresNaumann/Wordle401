@@ -13,8 +13,8 @@ def wordle():
     gw = WordleGWindow()
 
     # selecting a secret word from five letter words and converting to uppercase
-    # secretWord = random.choice(FIVE_LETTER_WORDS).upper()clecle
-    secretWord = "FALLS"
+    secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+    # secretWord = "FALLS"
     print(secretWord)
 
     # creating actions to be performed when the enter key is pressed
@@ -75,7 +75,8 @@ def wordle():
                 if changingGuessList[i] in changingList:
                     changingList[i] = fillerVar2
                     gw.set_square_color(gw.get_current_row(), i, PRESENT_COLOR)
-                    gw.set_key_color(testingGuessList[i], PRESENT_COLOR)
+                    if gw.get_key_color(testingGuessList[i]) != CORRECT_COLOR:
+                        gw.set_key_color(testingGuessList[i], PRESENT_COLOR)
 
             # print(changingList)
             # print(changingGuessList)
@@ -85,7 +86,8 @@ def wordle():
             for i in range(len(testingGuessList)):
                 if changingList[i] != fillerVar2 and changingList[i] != fillerVar:
                     gw.set_square_color(gw.get_current_row(), i, MISSING_COLOR)
-                    gw.set_key_color(testingGuessList[i], MISSING_COLOR)
+                    if gw.get_key_color(testingGuessList[i]) != CORRECT_COLOR and gw.get_key_color(testingGuessList[i]) != PRESENT_COLOR:
+                        gw.set_key_color(testingGuessList[i], MISSING_COLOR)
 
             # print(changingList)
             # print(changingGuessList)
