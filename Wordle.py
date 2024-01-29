@@ -118,6 +118,7 @@ def wordle():
 
 
     
+    gw.update_colors()
     gw.add_enter_listener(enter_action)
 
 

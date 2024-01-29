@@ -123,7 +123,7 @@ class WordleGWindow:
                     self._col -= 1
                     sq = self._grid[self._row][self._col]
                     sq.set_letter(" ")
-                    
+
             elif ch == "\r" or ch == "\n" or ch == "ENTER":
                 self.show_message("")
                 s = ""
@@ -209,12 +209,14 @@ class WordleGWindow:
 
     def set_square_letter(self, row, col, ch):
         self._grid[row][col].set_letter(ch)
+        self.update_colors()
 
     def get_square_color(self, row, col):
         return self._grid[row][col].get_color()
 
     def set_square_color(self, row, col, color):
         self._grid[row][col].set_color(color)
+        self.update_colors()
 
     def get_key_color(self, ch):
         return self._keys[ch].get_color()
@@ -243,6 +245,14 @@ class WordleGWindow:
             self._col -= 1
             sq = self._grid[self._row][self._col]
             sq.set_letter(" ")
+
+    def handle_enter_key(self):
+        self.show_message("")
+        s = ""
+        for col in range(N_COLS):
+            s += self._grid[self._row][col].get_letter()
+        for fn in self._enter_listeners:
+            fn(s)
 
     def create_colorblind_toggle(self):
         self.toggle_button = tkinter.Button(
