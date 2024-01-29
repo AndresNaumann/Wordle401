@@ -63,6 +63,7 @@ class WordleGWindow:
 
     def __init__(self):
         
+        
 
         """Creates the Wordle window."""
         
