@@ -1,6 +1,6 @@
 import random
-from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, N_ROWS
+from WordleDictionary2 import FIVE_LETTER_WORDS
+from WordleGraphics2 import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, N_ROWS
 
 
 def wordle():
