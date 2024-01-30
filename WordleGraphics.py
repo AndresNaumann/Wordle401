@@ -270,27 +270,33 @@ class WordleGWindow:
         self.toggle_button.config(text=f"Colorblind Mode: {'On' if self.colorblind_mode else 'Off'}")
 
     def update_colors(self):
-        # Update all squares and keys to the new color scheme
-            for row in self._grid:
-                for square in row:
-                    if square.get_color() in [CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR]:
-                        square.set_color(self.get_colorblind_color(square.get_color()))
+        for row in self._grid:
+            for square in row:
+            # Update color for all squares, not just specific ones
+                square.set_color(self.get_colorblind_color(square.get_color()))
 
-            for key in self._keys.values():
-                if key.get_color() in [CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR]:
-                    key.set_color(self.get_colorblind_color(key.get_color()))
+        for key in self._keys.values():
+        # Update color for all keys, not just specific ones
+            key.set_color(self.get_colorblind_color(key.get_color()))
 
-    def get_colorblind_color(self, normal_color):
-        # Return the colorblind-friendly equivalent of the normal color
-            if not self.colorblind_mode:
-                return normal_color
-            if normal_color == CORRECT_COLOR:
+    def get_colorblind_color(self, current_color):
+        if not self.colorblind_mode:
+            # Map colorblind colors back to the original colors
+            if current_color == CB_CORRECT_COLOR:
+                return CORRECT_COLOR
+            elif current_color == CB_PRESENT_COLOR:
+                return PRESENT_COLOR
+            elif current_color == CB_MISSING_COLOR:
+                return MISSING_COLOR
+        else:
+        # Map original colors to colorblind colors
+            if current_color == CORRECT_COLOR:
                 return CB_CORRECT_COLOR
-            elif normal_color == PRESENT_COLOR:
+            elif current_color == PRESENT_COLOR:
                 return CB_PRESENT_COLOR
-            elif normal_color == MISSING_COLOR:
+            elif current_color == MISSING_COLOR:
                 return CB_MISSING_COLOR
-            return normal_color
+        return current_color
 
 
 
