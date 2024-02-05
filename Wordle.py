@@ -1,8 +1,6 @@
 import random
-from WordleDictionary import FIVE_LETTER_WORDS, SPANISH_FIVE_LETTER_WORDS
+from WordleDictionary import CINCO_LETTER_WORDS, FIVE_LETTER_WORDS, SPANISH_FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, N_ROWS
-
-
 
 
 def wordle():
@@ -16,13 +14,19 @@ def wordle():
         "EN: English",
     }
 
+    CURRENT_DICT = []
+
 # Check if the user's input is one of the options
-    if user_input == 'English':
+    if user_input == "ENGLISH":
     # Respond to the user's selection
         secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+        CURRENT_DICT = FIVE_LETTER_WORDS
+        print("you are playing in english")
     else:
     # Handle invalid input
-        secretWord = random.choice(SPANISH_FIVE_LETTER_WORDS).upper()
+        secretWord = random.choice(CINCO_LETTER_WORDS).upper()
+        CURRENT_DICT = CINCO_LETTER_WORDS
+        print("you are playing in spanish")
     gameLength = N_ROWS
     print(gameLength)
     # load graphical interface
@@ -74,7 +78,7 @@ def wordle():
         # print(guessWord)
 
             # checking if the guess word is in the dictionary
-        if guessWord in FIVE_LETTER_WORDS:
+        if guessWord in CURRENT_DICT:
             gw.show_message("Word found")
             #makes a list of letters in the guessed word
             guessList = makeWordList(guessWord)
