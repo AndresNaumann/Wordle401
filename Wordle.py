@@ -1,33 +1,35 @@
 import random
-from WordleDictionary import FIVE_LETTER_WORDS
+from WordleDictionary import FIVE_LETTER_WORDS, SPANISH_FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, N_ROWS
-# Read a line of input from the user
-user_input = input("Choose english or spanish: ").strip().upper()
 
-# Define options
-options = {
-    "ES: Spanish",
-    "EN: Ensglish",
-}
-
-# Check if the user's input is one of the options
-if user_input in options:
-    # Respond to the user's selection
-    print(options[user_input])
-else:
-    # Handle invalid input
-    print("Invalid option. Please select A, B, or C.")
 
 
 
 def wordle():
+
+    # Read a line of input from the user
+    user_input = input("Choose english or spanish: ").strip().upper()
+
+# Define options
+    options = {
+        "ES: Spanish",
+        "EN: English",
+    }
+
+# Check if the user's input is one of the options
+    if user_input == 'English':
+    # Respond to the user's selection
+        secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+    else:
+    # Handle invalid input
+        secretWord = random.choice(SPANISH_FIVE_LETTER_WORDS).upper()
     gameLength = N_ROWS
     print(gameLength)
     # load graphical interface
     gw = WordleGWindow()
 
     # selecting a secret word from five letter words and converting to uppercase
-    secretWord = random.choice(FIVE_LETTER_WORDS).upper()
+    
 
     # # testing double letter guess DOORS
     # secretWord = "STEAL"
