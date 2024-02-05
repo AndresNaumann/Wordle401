@@ -833,3 +833,9 @@ FIVE_LETTER_WORDS = [
     "zones", "zonks", "zooey", "zooid", "zooks", "zooms", "zoons",
     "zoril", "zowie", "zymes"
 ]
+
+
+SPANISH_FIVE_LETTER_WORDS = [
+    "Aleta", "Arnes", "Astro", "Atajo", "Audio", "Avena", "Axila", "Bingo", "Boxer", "Bucal", "Burro", "Busto", "Cafes", "Cajas", "Caliz", "Callo", "Canas", "Canes", "Comic", "Danos", "Datos", "Dedos", "Donas", "Donas", "Dones", "Drama", "Dubai", "Ellas", "Encia", "Enojo", "Envio", "Error", "Esqui", "Euros", "Femur", "Forma", "Fosil", "Fotos", "Freno", "Fresa", "Gafas", "Gales", "Gases", "Gatos", "Genes", "Ghana", "Goles", "Gorra", "Gruas", "Grumo", "Haiti", "Hotel", "Huevo", "Hurto", "Ideas", "Iglus", "Ingle", "Islas", "Japon", "Jarra", "Jefes", "Jerga", "Jugos", "Julio", "Lagos", "Lazos", "Leyes", "Loros", "Lunar", "Magos", "Manos", "Mapas", "Mares", "Media", "Memes", "Menta", "Menus", "Mesas", "Metas", "Miles", "Modas", "Monos", "Moscu", "Movil", "Multa", "Naves", "Nepal", "Ninos", "Notas", "Nubes", "Nudos", "Obras", "Ojera", "Ollas", "Ondas", "Onzas", "Opera", "Osito", "Ovulo", "Oxido", "Panal", "Panes", "Paris", "Pasas", "Paseo", "Patos", "Pausa", "Pauta", "Pavos", "Pecas", "Peces", "Regla", "Reino", "Reyes", "Rimel", "Riocas", "Ritos", "Rulos", "Rusia", "Santa", "Sapos", "Vacas", "Valle", "Vasos", "Viaje"
+
+]

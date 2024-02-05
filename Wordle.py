@@ -1,6 +1,23 @@
 import random
 from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, N_ROWS
+# Read a line of input from the user
+user_input = input("Choose english or spanish: ").strip().upper()
+
+# Define options
+options = {
+    "ES: Spanish",
+    "EN: Ensglish",
+}
+
+# Check if the user's input is one of the options
+if user_input in options:
+    # Respond to the user's selection
+    print(options[user_input])
+else:
+    # Handle invalid input
+    print("Invalid option. Please select A, B, or C.")
+
 
 
 def wordle():
